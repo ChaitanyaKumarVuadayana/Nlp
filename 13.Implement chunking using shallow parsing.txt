@@ -1,0 +1,31 @@
+Implement chunking using shallow parsing?
+
+
+import nltk
+from nltk import RegexpParser
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag
+nltk.download("averaged_perceptron_tagger")
+# Sample sentence
+sentence = "The quick brown fox jumps over the lazy dog."
+
+# Tokenize the sentence
+tokens = word_tokenize(sentence)
+
+# Perform part-of-speech tagging
+pos_tags = pos_tag(tokens)
+
+# Define a chunk grammar to extract noun phrases (NP)
+chunk_grammar = r"""
+    NP: {<DT|JJ|NN.*>+}  # Chunk sequences of DT, JJ, NN
+"""
+
+# Create a chunk parser
+chunk_parser = RegexpParser(chunk_grammar)
+
+# Apply chunking to the part-of-speech tagged sentence
+chunked_sentence = chunk_parser.parse(pos_tags)
+
+# Print the chunked sentence
+print("Chunked Sentence:")
+print(chunked_sentence)

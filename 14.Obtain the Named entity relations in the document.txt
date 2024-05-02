@@ -1,0 +1,26 @@
+Obtain the Named entity relations in the document?
+
+
+import nltk
+
+# Sample document
+document = "Barack Obama was born in Hawaii and served as the 44th President of the United States."
+
+# Tokenize the document into sentences
+sentences = nltk.sent_tokenize(document)
+
+# Initialize the named entity recognizer
+ner_tagger = nltk.tag.pos_tag
+
+# Extract named entities from each sentence
+named_entities = []
+for sentence in sentences:
+    tokens = nltk.word_tokenize(sentence)
+    tagged_tokens = ner_tagger(tokens)
+    named_entities.extend(nltk.chunk.ne_chunk(tagged_tokens))
+
+# Print the named entities
+print("Named Entities:")
+for entity in named_entities:
+    if isinstance(entity, nltk.tree.Tree):
+        print(' '.join([child[0] for child in entity]), '-->', entity.label())

@@ -1,0 +1,32 @@
+Remove the stopwords and rareword in the document?
+
+
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk import FreqDist
+nltk.download("stopwords")
+
+# Sample document
+document = "NLTK (Natural Language Toolkit) is a leading platform for building Python programs to work with human language data. It provides easy-to-use interfaces to over 50 corpora and lexical resources such as WordNet, along with a suite of text processing libraries for classification, tokenization, stemming, tagging, parsing, and semantic reasoning. NLTK also provides wrappers for industrial-strength NLP libraries and an active discussion forum."
+
+# Tokenize the document into individual words
+tokens = word_tokenize(document)
+
+# Remove stopwords
+stop_words = set(stopwords.words('english'))
+filtered_tokens = [word for word in tokens if word.lower() not in stop_words]
+
+# Frequency analysis to identify rare words
+freq_dist = FreqDist(filtered_tokens)
+rare_words = set(word for word in freq_dist if freq_dist[word] < 2)  # Adjust threshold as needed
+
+# Remove rare words from the filtered tokens
+filtered_tokens = [word for word in filtered_tokens if word not in rare_words]
+
+# Join the filtered tokens to form a clean document
+clean_document = ' '.join(filtered_tokens)
+
+# Print the clean document
+print("Clean Document:")
+print(clean_document)

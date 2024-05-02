@@ -1,0 +1,41 @@
+Implement Unigram, Bigram, Trigram Tagger
+
+import nltk
+from nltk.corpus import brown
+from nltk.tokenize import word_tokenize
+from nltk.tag import UnigramTagger, BigramTagger, TrigramTagger
+nltk.download('brown')
+nltk.download('punkt')
+
+# Split the Brown Corpus into training and testing sets
+split_percentage = int(len(brown.tagged_sents()) * 0.9)
+train_data = brown.tagged_sents()[:split_percentage]
+test_data = brown.tagged_sents()[split_percentage:]
+
+# Train Unigram Tagger
+unigram_tagger = UnigramTagger(train_data)
+
+# Train Bigram Tagger
+bigram_tagger = BigramTagger(train_data, backoff=unigram_tagger)
+
+# Train Trigram Tagger
+trigram_tagger = TrigramTagger(train_data, backoff=bigram_tagger)
+
+# Example sentence for testing
+sentence = "Paytm crashes 20% again, Morgan Stanley hits ‘buy’"
+
+# Tokenize the sentence
+tokens = word_tokenize(sentence)
+
+# Tag with Unigram Tagger
+unigram_tags = unigram_tagger.tag(tokens)
+print("Unigram Tagger Tags:", unigram_tags)
+
+# Tag with Bigram Tagger
+bigram_tags = bigram_tagger.tag(tokens)
+print("Bigram Tagger Tags:", bigram_tags)
+
+# Tag with Trigram Tagger
+trigram_tags = trigram_tagger.tag(tokens)
+print("Trigram Tagger Tags:", trigram_tags)
+

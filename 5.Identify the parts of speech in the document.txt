@@ -1,0 +1,21 @@
+Identify the parts of speech in the document?
+
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag
+nltk.download('averaged_perceptron_tagger')
+
+
+# Sample document
+document = "NLTK (Natural Language Toolkit) is a leading platform for building Python programs to work with human language data. It provides easy-to-use interfaces to over 50 corpora and lexical resources such as WordNet, along with a suite of text processing libraries for classification, tokenization, stemming, tagging, parsing, and semantic reasoning. NLTK also provides wrappers for industrial-strength NLP libraries and an active discussion forum."
+
+# Tokenize the document into individual words
+tokens = word_tokenize(document)
+
+# Tag each tokenized word with its part of speech
+pos_tags = pos_tag(tokens)
+
+# Print the parts of speech
+print("Parts of Speech:")
+for token, pos_tag in pos_tags:
+    print(f"{token}: {pos_tag}")

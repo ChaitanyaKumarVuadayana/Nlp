@@ -1,0 +1,22 @@
+Write a program to read the words form a string variable/Text and perform tokenizing
+and Lancaster stemming by reading the input string?
+
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.stem import LancasterStemmer
+
+# Sample input string
+input_string = "NLTK (Natural Language Toolkit) is a leading platform for building Python programs to work with human language data."
+
+# Tokenize the input string
+tokens = word_tokenize(input_string)
+
+# Initialize the Lancaster stemmer
+stemmer = LancasterStemmer()
+
+# Apply Lancaster stemming to each token
+stemmed_words = [stemmer.stem(token) for token in tokens]
+
+# Print the stemmed words
+print("Stemmed words:")
+print(stemmed_words)

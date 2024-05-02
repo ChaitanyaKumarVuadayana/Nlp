@@ -1,0 +1,25 @@
+Define a grammar and obtain the sentences from the grammarimport nltk
+
+grammar = nltk.CFG.fromstring("""
+    S -> NP VP
+    NP -> Det N | Det N PP
+    VP -> V NP | V NP PP
+    PP -> P NP
+    Det -> 'the' | 'a'
+    N -> 'cat' | 'dog' | 'bird' | 'man' | 'park'
+    V -> 'chased' | 'saw' | 'ate' | 'walked'
+    P -> 'in' | 'on' | 'at'
+""")
+
+parser = nltk.ChartParser(grammar)
+
+input_sentences = ['the dog chased the cat', 'a man saw a bird']
+
+sentences = []
+for sent in input_sentences:
+    tokens = nltk.word_tokenize(sent)
+    for tree in parser.parse(tokens):
+        sentences.append(' '.join(tree.flatten()))
+
+for sentence in sentences:
+    print(sentence)

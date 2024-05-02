@@ -1,0 +1,22 @@
+Implement program for NER tagger
+
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.tag import pos_tag
+from nltk.chunk import ne_chunk
+nltk.download("punkt")
+nltk.download('averaged_perceptron_tagger')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
+
+
+doc = "Harry Potter, the young wizard with a lightning-shaped scar, attended Hogwarts School, faced challenges, and triumphed over the dark wizard Voldemort, bringing an end to the magical conflict."
+
+words = word_tokenize(doc)
+
+pos_tags = pos_tag(words)
+
+
+ne_tags = ne_chunk(pos_tags)
+
+print(ne_tags)

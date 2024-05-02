@@ -1,0 +1,28 @@
+Implement program for N-gram tagger
+
+import nltk
+from nltk.corpus import treebank
+from nltk.tag import NgramTagger
+from nltk.tokenize import word_tokenize
+
+# Set the value of n for N-gram tagging
+n = 2
+
+# Load and split the Treebank corpus into training and testing data
+train_data = treebank.tagged_sents()[:3000]
+
+# Train N-gram tagger with the specified value of n
+ngram_tagger = NgramTagger(n, train_data)
+
+# Test sentence
+doc = "hello, everyone this the ngram tagger program, Here we can perform action how the ngrams works"
+test_tokens = word_tokenize(doc)
+
+# Tag the test tokens
+tagged_sentence = ngram_tagger.tag(test_tokens)
+
+# Print the original document and tagged sentence
+print(doc)
+print()
+print("Tagged Sentence:")
+print(tagged_sentence)
